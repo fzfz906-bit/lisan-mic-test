@@ -3,26 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#040b1b">
+<meta name="theme-color" content="#06142e">
 
-<title>Lisan | محادثة بلا حدود</title>
+<title>Lisan V2 | لسان</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 background:
-radial-gradient(circle at 10% 0%,#123d78 0,transparent 32%),
-radial-gradient(circle at 100% 90%,#25205f 0,transparent 30%),
-#030918;
-color:#fff;
+radial-gradient(circle at 15% 10%,#123a75 0,transparent 30%),
+radial-gradient(circle at 90% 80%,#18245d 0,transparent 30%),
+#040b1b;
+color:white;
 min-height:100vh;
 }
 
 .container{
-width:min(1050px,92%);
+width:min(1100px,92%);
 margin:auto;
 }
 
@@ -30,43 +32,43 @@ header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:22px 0;
+padding:25px 0;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:10px;
 font-size:25px;
 font-weight:800;
+display:flex;
+gap:10px;
+align-items:center;
 }
 
 .logoIcon{
-width:45px;
-height:45px;
+width:44px;
+height:44px;
 display:grid;
 place-items:center;
-border-radius:15px;
+border-radius:14px;
 background:linear-gradient(135deg,#168cff,#695cff);
-box-shadow:0 0 35px #168cff55;
+box-shadow:0 0 30px #167cff55;
 }
 
 .live{
 padding:8px 13px;
 border-radius:30px;
 font-size:12px;
-color:#55ffc0;
-border:1px solid #55ffc044;
-background:#55ffc00d;
+color:#54ffc0;
+border:1px solid #54ffc044;
+background:#54ffc00c;
 }
 
 .hero{
 text-align:center;
-padding:38px 0 25px;
+padding:45px 0 30px;
 }
 
 h1{
-font-size:clamp(42px,8vw,75px);
+font-size:clamp(42px,8vw,76px);
 line-height:1.05;
 margin:0;
 }
@@ -79,249 +81,308 @@ color:transparent;
 
 .hero p{
 color:#9eb0cf;
-font-size:17px;
+font-size:18px;
 line-height:1.8;
-max-width:680px;
+max-width:720px;
 margin:20px auto;
 }
 
-.setup{
+.demo{
 background:#ffffff08;
-border:1px solid #ffffff15;
+border:1px solid #ffffff14;
 border-radius:28px;
 padding:22px;
-box-shadow:0 30px 90px #0009;
+box-shadow:0 30px 80px #0008;
 backdrop-filter:blur(20px);
 }
 
-.setupTitle{
-font-size:14px;
-color:#8298bd;
-margin-bottom:14px;
-}
-
 .languages{
-display:grid;
-grid-template-columns:1fr 60px 1fr;
-gap:12px;
+display:flex;
 align-items:center;
+gap:12px;
+justify-content:center;
+margin-bottom:22px;
 }
 
 .language{
-padding:18px;
-background:#081a39;
-border:1px solid #213a63;
-border-radius:18px;
-font-weight:800;
-font-size:17px;
+flex:1;
+max-width:350px;
+padding:15px;
+background:#091936;
+border:1px solid #21385e;
+border-radius:16px;
+font-weight:700;
 }
 
 .swap{
-width:52px;
-height:52px;
+width:50px;
+height:50px;
 border:0;
 border-radius:50%;
 background:linear-gradient(135deg,#178dff,#685cff);
-color:#fff;
-font-size:23px;
+color:white;
+font-size:22px;
 cursor:pointer;
-box-shadow:0 10px 30px #327cff44;
+box-shadow:0 10px 30px #167cff33;
 }
 
-.start{
-width:100%;
-margin-top:18px;
-padding:16px;
-border:0;
-border-radius:16px;
-background:linear-gradient(135deg,#178dff,#685cff);
-color:#fff;
+.people{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.person{
+background:#06142d;
+border:1px solid #1b3156;
+border-radius:22px;
+padding:20px;
+position:relative;
+overflow:hidden;
+}
+
+.person::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:2px;
+background:linear-gradient(90deg,#178dff,#675cff);
+opacity:.8;
+}
+
+.personHeader{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:18px;
+}
+
+.personTitle{
 font-size:17px;
 font-weight:800;
+}
+
+.personLang{
+font-size:12px;
+color:#7890b5;
+padding:7px 10px;
+border-radius:20px;
+background:#0d2040;
+border:1px solid #20385d;
+}
+
+.personBox{
+min-height:140px;
+padding:18px;
+background:#081a36;
+border:1px solid #1b345a;
+border-radius:17px;
+text-align:right;
+}
+
+.label{
+font-size:12px;
+color:#718bb5;
+margin-bottom:12px;
+}
+
+.sourceText{
+font-size:20px;
+line-height:1.7;
+min-height:65px;
+word-break:break-word;
+}
+
+.placeholder{
+color:#4e6387;
+font-size:16px;
+}
+
+.translation{
+margin-top:12px;
+padding:15px;
+border-radius:14px;
+background:#0a2244;
+border:1px solid #21436d;
+}
+
+.translationLabel{
+font-size:11px;
+color:#6e8dbd;
+margin-bottom:6px;
+}
+
+.translationText{
+font-size:19px;
+line-height:1.6;
+min-height:32px;
+word-break:break-word;
+}
+
+.micButton{
+width:72px;
+height:72px;
+border:0;
+border-radius:50%;
+font-size:28px;
+color:white;
+background:linear-gradient(145deg,#178dff,#675cff);
+box-shadow:0 0 0 7px #477cff0e,0 12px 35px #477cff45;
 cursor:pointer;
-box-shadow:0 15px 35px #327cff33;
-}
-
-.conversation{
-margin-top:20px;
-display:none;
-}
-
-.conversation.active{
+margin:20px auto 8px;
 display:block;
 }
 
-.topbar{
+.micButton.listening{
+animation:pulse 1.2s infinite;
+background:linear-gradient(145deg,#ff486c,#ff7a45);
+}
+
+@keyframes pulse{
+0%{
+box-shadow:0 0 0 0 #ff526655;
+}
+70%{
+box-shadow:0 0 0 25px #ff526600;
+}
+100%{
+box-shadow:0 0 0 0 #ff526600;
+}
+}
+
+.personStatus{
+text-align:center;
+font-size:12px;
+color:#8197ba;
+min-height:20px;
+}
+
+.conversation{
+margin-top:25px;
+background:#ffffff05;
+border:1px solid #ffffff10;
+border-radius:22px;
+padding:20px;
+}
+
+.conversationHeader{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:14px;
+margin-bottom:15px;
 }
 
-.online{
-color:#54ffc0;
-font-size:13px;
+.conversationTitle{
+font-size:18px;
+font-weight:800;
 }
 
 .clear{
-border:1px solid #263e63;
-background:#0b1b37;
-color:#9fb4d7;
+border:1px solid #294364;
+background:#102344;
+color:#a9bee1;
 padding:8px 12px;
 border-radius:10px;
 cursor:pointer;
 }
 
 .chat{
-height:430px;
+display:flex;
+flex-direction:column;
+gap:12px;
+max-height:430px;
 overflow-y:auto;
-padding:18px;
-background:#ffffff06;
-border:1px solid #ffffff12;
-border-radius:24px;
+padding:5px;
 }
 
-.empty{
-height:100%;
-display:grid;
-place-items:center;
+.emptyChat{
 text-align:center;
-color:#60779e;
-}
-
-.emptyIcon{
-font-size:45px;
-margin-bottom:10px;
+color:#52698f;
+padding:30px 10px;
+font-size:14px;
 }
 
 .message{
+padding:15px;
+border-radius:17px;
+max-width:85%;
+border:1px solid #1b3457;
+}
+
+.message.person1{
+align-self:flex-start;
+background:#0a2140;
+}
+
+.message.person2{
+align-self:flex-end;
+background:#17194a;
+}
+
+.messageTop{
 display:flex;
-margin:14px 0;
-animation:appear .25s ease;
+justify-content:space-between;
+gap:15px;
+align-items:center;
+margin-bottom:8px;
 }
 
-.message.me{
-justify-content:flex-start;
-}
-
-.message.other{
-justify-content:flex-end;
-}
-
-.bubble{
-max-width:82%;
-padding:13px 16px;
-border-radius:20px;
-line-height:1.65;
-}
-
-.me .bubble{
-background:linear-gradient(135deg,#126bd0,#4250c5);
-border-bottom-right-radius:5px;
-}
-
-.other .bubble{
-background:#0b1d3c;
-border:1px solid #22395f;
-border-bottom-left-radius:5px;
-}
-
-.original{
-font-size:15px;
-font-weight:700;
-}
-
-.translation{
-margin-top:7px;
-padding-top:7px;
-border-top:1px solid #ffffff18;
-font-size:14px;
-color:#c2d2ec;
-direction:ltr;
-text-align:left;
-}
-
-.message.other .translation{
-direction:rtl;
-text-align:right;
-}
-
-.sender{
+.messagePerson{
 font-size:11px;
-color:#7189af;
-margin-bottom:5px;
+color:#7290bb;
 }
 
-.voice{
+.messageLang{
+font-size:10px;
+color:#536f99;
+}
+
+.messageSource{
+font-size:17px;
+line-height:1.6;
+}
+
+.messageTarget{
 margin-top:8px;
-font-size:11px;
-opacity:.7;
+padding-top:8px;
+border-top:1px solid #ffffff10;
+font-size:16px;
+color:#a7c5ef;
+line-height:1.6;
 }
 
-.controls{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
-margin-top:15px;
-}
-
-.control{
-background:#071732;
-border:1px solid #1b3459;
-border-radius:20px;
-padding:18px;
-text-align:center;
-}
-
-.controlName{
-font-size:13px;
-color:#8fa6c9;
-margin-bottom:10px;
-}
-
-.mic{
-width:72px;
-height:72px;
-border:0;
-border-radius:50%;
-font-size:28px;
-color:#fff;
-background:linear-gradient(145deg,#178dff,#675cff);
+.speakBtn{
+margin-top:10px;
+border:1px solid #294364;
+background:#102344;
+color:#9fb8df;
+padding:6px 10px;
+border-radius:9px;
 cursor:pointer;
-box-shadow:0 10px 30px #347cff44;
-}
-
-.mic.listening{
-background:linear-gradient(145deg,#ff486c,#ff7a45);
-animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-0%{box-shadow:0 0 0 0 #ff526655}
-70%{box-shadow:0 0 0 24px #ff526600}
-100%{box-shadow:0 0 0 0 #ff526600}
-}
-
-.controlStatus{
-margin-top:9px;
-font-size:12px;
-color:#7088ad;
-min-height:18px;
+font-size:11px;
 }
 
 .examples{
-margin-top:38px;
+margin-top:40px;
 }
 
 .examples h2{
 text-align:center;
-margin-bottom:18px;
+}
+
+.examplesSub{
+text-align:center;
+color:#7187aa;
+font-size:13px;
 }
 
 .phrases{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:10px;
+margin-top:20px;
 }
 
 .phrase{
@@ -335,7 +396,7 @@ transition:.2s;
 
 .phrase:hover{
 border-color:#4289ff;
-transform:translateY(-2px);
+transform:translateY(-1px);
 }
 
 .ar{
@@ -366,7 +427,7 @@ border-radius:16px;
 
 .stat strong{
 display:block;
-font-size:23px;
+font-size:24px;
 }
 
 .stat span{
@@ -390,29 +451,9 @@ padding:40px 0 25px;
 color:#4e6488;
 }
 
-@keyframes appear{
-from{
-opacity:0;
-transform:translateY(8px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
 @media(max-width:700px){
 
-.languages{
-grid-template-columns:1fr;
-}
-
-.swap{
-margin:auto;
-transform:rotate(90deg);
-}
-
-.controls{
+.people{
 grid-template-columns:1fr;
 }
 
@@ -424,12 +465,22 @@ grid-template-columns:1fr;
 grid-template-columns:repeat(2,1fr);
 }
 
-.chat{
-height:400px;
+.languages{
+gap:6px;
 }
 
-.bubble{
-max-width:90%;
+.language{
+font-size:13px;
+padding:13px 5px;
+}
+
+.swap{
+width:42px;
+height:42px;
+}
+
+.message{
+max-width:94%;
 }
 
 }
@@ -461,47 +512,181 @@ Lisan
 
 <p>
 محادثة بين شخصين بلغتين مختلفتين.
-تحدث بلغتك، ودع Lisan يحول كلامك للطرف الآخر.
+تحدث بلغتك وسيحاول Lisan تحويل كلامك إلى لغة الطرف الآخر.
 </p>
 
 
-<div class="setup">
+<div class="demo">
 
-<div class="setupTitle">
-🌍 اختر لغتيكما
-</div>
 
 <div class="languages">
 
-<div class="language" id="person1Lang">
-🇸🇦 الشخص الأول — العربية
+<div class="language" id="sourceLang">
+🇸🇦 العربية
 </div>
 
-<button class="swap" onclick="swapLanguages()">⇄</button>
-
-<div class="language" id="person2Lang">
-🇬🇧 الشخص الثاني — English
-</div>
-
-</div>
-
-<button class="start" onclick="startConversation()">
-🚀 ابدأ المحادثة
+<button class="swap" onclick="swapLanguages()">
+⇄
 </button>
 
+<div class="language" id="targetLang">
+🇬🇧 English
+</div>
+
 </div>
 
 
-<div class="conversation" id="conversation">
+<div class="people">
 
-<div class="topbar">
 
-<div>
-<strong>محادثة Lisan</strong>
-<div class="online">● جاهز للاستماع</div>
+<!-- PERSON 1 -->
+
+<div class="person">
+
+<div class="personHeader">
+
+<div class="personTitle">
+👤 الشخص الأول
 </div>
 
-<button class="clear" onclick="clearChat()">
+<div class="personLang" id="person1Lang">
+🇸🇦 العربية
+</div>
+
+</div>
+
+
+<div class="personBox">
+
+<div class="label">
+🎙️ كلام الشخص الأول
+</div>
+
+<div class="sourceText" id="person1Source">
+<span class="placeholder">
+اضغط على الميكروفون وتحدث...
+</span>
+</div>
+
+
+<div class="translation">
+
+<div class="translationLabel">
+🌍 ما سيسمعه الشخص الثاني
+</div>
+
+<div class="translationText" id="person1Target">
+<span class="placeholder">
+ستظهر الترجمة هنا...
+</span>
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="micButton"
+id="mic1"
+onclick="listenFor(1)"
+>
+🎙️
+</button>
+
+<div
+class="personStatus"
+id="status1"
+>
+اضغط وتحدث بالعربية
+</div>
+
+</div>
+
+
+
+<!-- PERSON 2 -->
+
+<div class="person">
+
+<div class="personHeader">
+
+<div class="personTitle">
+👤 الشخص الثاني
+</div>
+
+<div class="personLang" id="person2Lang">
+🇬🇧 English
+</div>
+
+</div>
+
+
+<div class="personBox">
+
+<div class="label">
+🎙️ كلام الشخص الثاني
+</div>
+
+<div class="sourceText" id="person2Source">
+<span class="placeholder">
+Press the microphone and speak...
+</span>
+</div>
+
+
+<div class="translation">
+
+<div class="translationLabel">
+🌍 What person one hears
+</div>
+
+<div class="translationText" id="person2Target">
+<span class="placeholder">
+Translation will appear here...
+</span>
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="micButton"
+id="mic2"
+onclick="listenFor(2)"
+>
+🎙️
+</button>
+
+<div
+class="personStatus"
+id="status2"
+>
+Press and speak English
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- CONVERSATION -->
+
+<div class="conversation">
+
+<div class="conversationHeader">
+
+<div class="conversationTitle">
+💬 المحادثة
+</div>
+
+<button
+class="clear"
+onclick="clearChat()"
+>
 مسح
 </button>
 
@@ -510,70 +695,35 @@ Lisan
 
 <div class="chat" id="chat">
 
-<div class="empty" id="empty">
-
-<div>
-<div class="emptyIcon">💬</div>
-<div>ابدأ الكلام...</div>
-<div style="font-size:12px;margin-top:6px">
-كل شخص يتحدث بلغته
-</div>
+<div class="emptyChat" id="emptyChat">
+ابدأ الكلام من أحد الميكروفونين وستظهر المحادثة هنا.
 </div>
 
 </div>
 
 </div>
 
-
-<div class="controls">
-
-<div class="control">
-
-<div class="controlName">
-🇸🇦 الشخص الأول
-</div>
-
-<button class="mic" id="mic1" onclick="listenFor(1)">
-🎙️
-</button>
-
-<div class="controlStatus" id="status1">
-اضغط وتحدث بالعربية
-</div>
-
-</div>
-
-
-<div class="control">
-
-<div class="controlName">
-🇬🇧 الشخص الثاني
-</div>
-
-<button class="mic" id="mic2" onclick="listenFor(2)">
-🎙️
-</button>
-
-<div class="controlStatus" id="status2">
-Press and speak English
-</div>
-
-</div>
-
-</div>
 
 </div>
 
 </section>
+
 
 
 <section class="examples">
 
-<h2>💬 جرّب الجمل</h2>
+<h2>
+جرّب الجمل
+</h2>
+
+<div class="examplesSub">
+اضغط على أي جملة لتجربتها مباشرة
+</div>
 
 <div class="phrases" id="phrases"></div>
 
 </section>
+
 
 
 <div class="stats">
@@ -589,27 +739,29 @@ Press and speak English
 </div>
 
 <div class="stat">
-<strong>🎙️</strong>
-<span>صوت مباشر</span>
+<strong>👥</strong>
+<span>شخصان</span>
 </div>
 
 <div class="stat">
-<strong>⚡</strong>
-<span>محادثة فورية</span>
+<strong>🔊</strong>
+<span>صوت</span>
 </div>
 
 </div>
+
 
 
 <div class="notice">
 
-<strong>نسخة Lisan v2 التجريبية:</strong><br>
+<strong>نسخة Lisan V2 التجريبية:</strong>
 
-التعرف على الكلام يتم من المتصفح.
-الترجمة الحالية تعتمد على قاعدة الجمل التجريبية.
-الخطوة التالية هي ربط Lisan بمحرك ترجمة حقيقي يسمح بترجمة أي جملة.
+التعرف على الصوت يتم من المتصفح.
+الترجمة الحالية تعتمد على قاعدة من 100 عبارة جاهزة.
+المرحلة القادمة هي ربط Lisan بمحرك ترجمة حقيقي لترجمة أي جملة.
 
 </div>
+
 
 
 <footer>
@@ -619,11 +771,12 @@ Lisan © 2026 — Speak. Understand. Connect.
 </div>
 
 
+
 <script>
 
-/* =========================================
-   100 PHRASES
-========================================= */
+/* =====================================================
+   100 ARABIC / ENGLISH PHRASES
+===================================================== */
 
 const phrases = [
 
@@ -735,28 +888,35 @@ const phrases = [
 ["أين قسم الأشعة؟","Where is radiology?"],
 ["أريد التحدث مع الطبيب","I want to speak with the doctor"],
 ["متى تظهر نتيجة التحليل؟","When will the test result be ready?"],
-["هل يوجد طبيب يتحدث الإنجليزية؟","Is there a doctor who speaks الإنجليزية?"]
+["هل يوجد طبيب يتحدث الإنجليزية؟","Is there a doctor who speaks English?"]
 
 ];
 
 
-/* =========================================
+/* =====================================================
    STATE
-========================================= */
+===================================================== */
 
 let arabicToEnglish = true;
+
 let recognition = null;
+
 let listening = false;
 
+let activePerson = null;
 
-/* =========================================
-   LOAD PHRASES
-========================================= */
+let finalTranscript = "";
 
-const phraseContainer =
+
+
+/* =====================================================
+   DISPLAY PHRASES
+===================================================== */
+
+const phrasesContainer =
 document.getElementById("phrases");
 
-phrases.forEach((p)=>{
+phrases.forEach((p,index)=>{
 
 const div = document.createElement("div");
 
@@ -769,31 +929,43 @@ div.innerHTML = `
 
 div.onclick = ()=>{
 
-startConversation();
+/*
+   الجمل التجريبية تعمل مع الشخص الأول
+*/
+
+const sourceArabic = arabicToEnglish;
 
 const source =
-arabicToEnglish ? p[0] : p[1];
+sourceArabic ? p[0] : p[1];
 
 const target =
-arabicToEnglish ? p[1] : p[0];
+sourceArabic ? p[1] : p[0];
+
+showPerson(1,source,target,sourceArabic);
 
 addMessage(
 source,
 target,
 1,
-true
+sourceArabic
+);
+
+speak(
+target,
+sourceArabic ? "en-US" : "ar-SA"
 );
 
 };
 
-phraseContainer.appendChild(div);
+phrasesContainer.appendChild(div);
 
 });
 
 
-/* =========================================
+
+/* =====================================================
    NORMALIZE
-========================================= */
+===================================================== */
 
 function normalize(text){
 
@@ -806,30 +978,47 @@ return text
 }
 
 
-/* =========================================
-   TRANSLATE
-========================================= */
 
-function translate(text){
+/* =====================================================
+   TRANSLATE
+   IMPORTANT:
+   sourceArabic is passed directly.
+   We do NOT depend on global state while translating.
+===================================================== */
+
+function translateForDirection(text,sourceArabic){
 
 const input = normalize(text);
 
 let best = null;
+
 let bestScore = 0;
 
 for(const pair of phrases){
 
 const source =
-arabicToEnglish ? pair[0] : pair[1];
+sourceArabic ? pair[0] : pair[1];
 
 const target =
-arabicToEnglish ? pair[1] : pair[0];
+sourceArabic ? pair[1] : pair[0];
 
 const s = normalize(source);
 
+
+/*
+   Exact match
+*/
+
 if(input === s){
+
 return target;
+
 }
+
+
+/*
+   Similarity match
+*/
 
 const inputWords =
 input.split(" ");
@@ -842,10 +1031,13 @@ let matches = 0;
 inputWords.forEach(word=>{
 
 if(sourceWords.includes(word)){
+
 matches++;
+
 }
 
 });
+
 
 const score =
 matches /
@@ -854,9 +1046,14 @@ inputWords.length,
 sourceWords.length
 );
 
-if(score > bestScore && score >= .55){
+
+if(
+score > bestScore &&
+score >= .55
+){
 
 bestScore = score;
+
 best = target;
 
 }
@@ -868,64 +1065,10 @@ return best;
 }
 
 
-/* =========================================
-   START CONVERSATION
-========================================= */
 
-function startConversation(){
-
-document
-.getElementById("conversation")
-.classList.add("active");
-
-window.scrollTo({
-top:
-document.getElementById("conversation")
-.offsetTop - 20,
-behavior:"smooth"
-});
-
-}
-
-
-/* =========================================
-   SWAP LANGUAGES
-========================================= */
-
-function swapLanguages(){
-
-arabicToEnglish = !arabicToEnglish;
-
-document.getElementById("person1Lang")
-.textContent =
-arabicToEnglish
-? "🇸🇦 الشخص الأول — العربية"
-: "🇬🇧 الشخص الأول — English";
-
-document.getElementById("person2Lang")
-.textContent =
-arabicToEnglish
-? "🇬🇧 الشخص الثاني — English"
-: "🇸🇦 الشخص الثاني — العربية";
-
-document.getElementById("status1")
-.textContent =
-arabicToEnglish
-? "اضغط وتحدث بالعربية"
-: "Press and speak English";
-
-document.getElementById("status2")
-.textContent =
-arabicToEnglish
-? "Press and speak English"
-: "اضغط وتحدث بالعربية";
-
-}
-
-
-/* =========================================
-   LISTEN
-========================================= */
+/* =====================================================
+   LISTEN FOR PERSON
+===================================================== */
 
 function listenFor(person){
 
@@ -933,19 +1076,27 @@ const SpeechRecognition =
 window.SpeechRecognition ||
 window.webkitSpeechRecognition;
 
+
 if(!SpeechRecognition){
 
-alert(
-"التعرف على الصوت غير مدعوم هنا. افتح Lisan في Safari أو Chrome."
+setStatus(
+person,
+"❌ التعرف على الصوت غير مدعوم. افتح الموقع في Safari أو Chrome."
 );
 
 return;
 
 }
 
+
+/*
+   إذا كان الميكروفون يعمل،
+   اضغط مرة ثانية لإيقافه.
+*/
+
 if(listening){
 
-if(recognition){
+if(activePerson === person && recognition){
 
 recognition.stop();
 
@@ -955,58 +1106,85 @@ return;
 
 }
 
-recognition =
-new SpeechRecognition();
 
-const isPerson1 =
-person === 1;
+/*
+   تحديد لغة هذا الشخص
+*/
 
 const sourceArabic =
-isPerson1
+person === 1
 ? arabicToEnglish
 : !arabicToEnglish;
 
-const sourceLang =
+
+/*
+   إنشاء التعرف
+*/
+
+recognition =
+new SpeechRecognition();
+
+
+recognition.lang =
 sourceArabic
 ? "ar-SA"
 : "en-US";
 
-recognition.lang = sourceLang;
 
 recognition.continuous = false;
+
 recognition.interimResults = true;
+
 recognition.maxAlternatives = 3;
 
 
-const mic =
-document.getElementById(
-isPerson1 ? "mic1" : "mic2"
-);
+listening = true;
 
-const status =
-document.getElementById(
-isPerson1 ? "status1" : "status2"
-);
+activePerson = person;
 
+finalTranscript = "";
+
+
+/*
+   START
+*/
 
 recognition.onstart = ()=>{
 
-listening = true;
+const mic =
+document.getElementById(
+"mic"+person
+);
 
 mic.classList.add("listening");
+
 mic.textContent = "⏹️";
 
-status.textContent =
+
+setStatus(
+person,
 sourceArabic
-? "🎙️ أستمع..."
-: "🎙️ Listening...";
+? "🎙️ أستمع... قل جملة"
+: "🎙️ Listening... speak a sentence"
+);
 
 };
 
 
+/*
+   RESULT
+*/
+
 recognition.onresult = (event)=>{
 
-let transcript = "";
+let interim = "";
+
+let finals = "";
+
+
+/*
+   نجمع النتائج النهائية فقط
+*/
 
 for(
 let i=event.resultIndex;
@@ -1014,70 +1192,231 @@ i<event.results.length;
 i++
 ){
 
-transcript +=
+const text =
 event.results[i][0].transcript;
 
-}
 
-transcript =
-transcript.trim();
+if(event.results[i].isFinal){
 
-const result =
-translateForLanguage(
-transcript,
-sourceArabic
-);
-
-if(transcript){
-
-status.textContent =
-"📝 " + transcript;
-
-}
-
-if(result){
-
-addMessage(
-transcript,
-result,
-person,
-false
-);
-
-}
-
-};
-
-
-recognition.onerror = (event)=>{
-
-console.log(event.error);
-
-if(event.error === "not-allowed"){
-
-status.textContent =
-"❌ اسمح للمتصفح باستخدام الميكروفون.";
-
-}else if(event.error === "no-speech"){
-
-status.textContent =
-"لم أسمع شيئًا.";
+finals += text;
 
 }else{
 
-status.textContent =
-"حدث خطأ، حاول مرة أخرى.";
+interim += text;
 
 }
 
-resetMic(person);
+}
+
+
+/*
+   حفظ النتيجة النهائية
+*/
+
+if(finals.trim()){
+
+finalTranscript += finals;
+
+}
+
+
+/*
+   إظهار الكلام للمستخدم
+*/
+
+const preview =
+(finalTranscript + " " + interim).trim();
+
+
+if(preview){
+
+document.getElementById(
+"person"+person+"Source"
+).textContent = preview;
+
+}
+
+
+/*
+   أثناء الكلام:
+   نعرض الترجمة فقط إذا كانت
+   النتيجة قابلة للمطابقة.
+*/
+
+if(interim){
+
+const liveResult =
+translateForDirection(
+interim,
+sourceArabic
+);
+
+if(liveResult){
+
+document.getElementById(
+"person"+person+"Target"
+).textContent =
+liveResult;
+
+}
+
+}
 
 };
 
 
+/*
+   ERROR
+*/
+
+recognition.onerror = (event)=>{
+
+console.log(
+"Speech error:",
+event.error
+);
+
+
+if(event.error === "not-allowed"){
+
+setStatus(
+person,
+"❌ اسمح للمتصفح باستخدام الميكروفون."
+);
+
+}else if(event.error === "no-speech"){
+
+setStatus(
+person,
+"لم أسمع شيئًا، حاول مرة أخرى."
+);
+
+}else if(event.error === "aborted"){
+
+setStatus(
+person,
+"تم إيقاف الاستماع."
+);
+
+}else{
+
+setStatus(
+person,
+"حدث خطأ، حاول مرة أخرى."
+);
+
+}
+
+resetMic();
+
+};
+
+
+/*
+   END
+*/
+
 recognition.onend = ()=>{
 
-resetMic(person);
+const source =
+finalTranscript.trim();
+
+
+/*
+   إذا كان فيه كلام
+*/
+
+if(source){
+
+/*
+   نترجم باستخدام اتجاه اللغة
+   الذي كان موجودًا عند بداية التسجيل.
+*/
+
+const result =
+translateForDirection(
+source,
+sourceArabic
+);
+
+
+if(result){
+
+/*
+   عرض الترجمة
+*/
+
+document.getElementById(
+"person"+person+"Target"
+).textContent =
+result;
+
+
+/*
+   إضافة للمحادثة
+*/
+
+addMessage(
+source,
+result,
+person,
+sourceArabic
+);
+
+
+/*
+   نطق الترجمة
+*/
+
+speak(
+result,
+sourceArabic
+? "en-US"
+: "ar-SA"
+);
+
+
+/*
+   حالة النجاح
+*/
+
+setStatus(
+person,
+sourceArabic
+? "✅ تمت الترجمة"
+: "✅ Translation complete"
+);
+
+
+}else{
+
+/*
+   لم نجد الجملة
+*/
+
+document.getElementById(
+"person"+person+"Target"
+).innerHTML =
+'<span class="placeholder">هذه الجملة خارج جمل الديمو الـ100.</span>';
+
+
+setStatus(
+person,
+sourceArabic
+? "لم أجد ترجمة لهذه العبارة في النسخة التجريبية."
+: "This sentence is outside the demo phrases."
+);
+
+}
+
+}
+
+
+/*
+   Reset
+*/
+
+resetMic();
 
 };
 
@@ -1085,106 +1424,104 @@ try{
 
 recognition.start();
 
-}catch(e){
+}catch(error){
 
-console.log(e);
+console.log(error);
 
-}
-
-}
-
-
-/* =========================================
-   TRANSLATE FOR PERSON
-========================================= */
-
-function translateForLanguage(
-text,
-sourceArabic
-){
-
-const input = normalize(text);
-
-let best = null;
-let bestScore = 0;
-
-for(const pair of phrases){
-
-const source =
-sourceArabic
-? pair[0]
-: pair[1];
-
-const target =
-sourceArabic
-? pair[1]
-: pair[0];
-
-const s =
-normalize(source);
-
-if(input === s){
-
-return target;
+resetMic();
 
 }
 
-const inputWords =
-input.split(" ");
-
-const sourceWords =
-s.split(" ");
-
-let matches = 0;
-
-inputWords.forEach(word=>{
-
-if(sourceWords.includes(word)){
-matches++;
 }
 
-});
 
-const score =
-matches /
-Math.max(
-inputWords.length,
-sourceWords.length
+
+/* =====================================================
+   RESET MICROPHONE
+===================================================== */
+
+function resetMic(){
+
+listening = false;
+
+activePerson = null;
+
+
+for(let i=1;i<=2;i++){
+
+const mic =
+document.getElementById(
+"mic"+i
 );
 
-if(
-score > bestScore &&
-score >= .55
+mic.classList.remove("listening");
+
+mic.textContent = "🎙️";
+
+}
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function setStatus(person,text){
+
+document.getElementById(
+"status"+person
+).textContent = text;
+
+}
+
+
+
+/* =====================================================
+   SHOW PERSON
+===================================================== */
+
+function showPerson(
+person,
+source,
+target,
+sourceArabic
 ){
 
-bestScore = score;
-best = target;
+document.getElementById(
+"person"+person+"Source"
+).textContent =
+source;
+
+
+document.getElementById(
+"person"+person+"Target"
+).textContent =
+target;
 
 }
 
-}
-
-return best;
-
-}
 
 
-/* =========================================
+/* =====================================================
    ADD MESSAGE
-========================================= */
+===================================================== */
 
 function addMessage(
 source,
 target,
 person,
-example
+sourceArabic
 ){
 
 const chat =
 document.getElementById("chat");
 
+
 const empty =
-document.getElementById("empty");
+document.getElementById("emptyChat");
+
 
 if(empty){
 
@@ -1192,156 +1529,242 @@ empty.remove();
 
 }
 
+
 const message =
 document.createElement("div");
 
+
 message.className =
 "message " +
-(person === 1 ? "me" : "other");
+(person === 1
+? "person1"
+: "person2");
 
 
-const sourceArabic =
+const personName =
 person === 1
-? arabicToEnglish
-: !arabicToEnglish;
+? "👤 الشخص الأول"
+: "👤 الشخص الثاني";
 
-const sourceFlag =
-sourceArabic ? "🇸🇦" : "🇬🇧";
 
-const targetFlag =
-sourceArabic ? "🇬🇧" : "🇸🇦";
+const sourceLanguage =
+sourceArabic
+? "🇸🇦 العربية"
+: "🇬🇧 English";
+
+
+const targetLanguage =
+sourceArabic
+? "🇬🇧 English"
+: "🇸🇦 العربية";
 
 
 message.innerHTML = `
 
-<div class="bubble">
+<div class="messageTop">
 
-<div class="sender">
-${sourceFlag}
-${person === 1 ? "الشخص الأول" : "الشخص الثاني"}
+<div class="messagePerson">
+${personName}
 </div>
 
-<div class="original">
+<div class="messageLang">
+${sourceLanguage} → ${targetLanguage}
+</div>
+
+</div>
+
+<div class="messageSource">
 ${escapeHTML(source)}
 </div>
 
-<div class="translation">
-${targetFlag}
+<div class="messageTarget">
 ${escapeHTML(target)}
 </div>
 
-<div class="voice">
-🔊 الترجمة
-</div>
-
-</div>
+<button class="speakBtn">
+🔊 تشغيل الترجمة
+</button>
 
 `;
 
+
+const speakButton =
+message.querySelector(".speakBtn");
+
+
+speakButton.onclick = ()=>{
+
+speak(
+target,
+sourceArabic
+? "en-US"
+: "ar-SA"
+);
+
+};
+
+
 chat.appendChild(message);
+
+
+/*
+   النزول لآخر رسالة
+*/
 
 chat.scrollTop =
 chat.scrollHeight;
 
+}
 
-/* نطق الترجمة */
 
-const targetLanguage =
-sourceArabic
-? "en-US"
-: "ar-SA";
 
-speak(
-target,
-targetLanguage
-);
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text){
+
+const div =
+document.createElement("div");
+
+div.textContent = text;
+
+return div.innerHTML;
 
 }
 
 
-/* =========================================
-   SPEECH
-========================================= */
 
-function speak(text,lang){
+/* =====================================================
+   SWAP LANGUAGES
+===================================================== */
 
-if(!("speechSynthesis" in window)){
+function swapLanguages(){
+
+if(listening){
+
+alert("أوقف الميكروفون أولًا ثم بدّل اللغات.");
+
 return;
-}
-
-speechSynthesis.cancel();
-
-const voice =
-new SpeechSynthesisUtterance(text);
-
-voice.lang = lang;
-voice.rate = .95;
-voice.pitch = 1;
-
-speechSynthesis.speak(voice);
 
 }
 
 
-/* =========================================
-   RESET MIC
-========================================= */
+arabicToEnglish =
+!arabicToEnglish;
 
-function resetMic(person){
 
-listening = false;
+/*
+   أعلى الشاشة
+*/
 
-const mic =
 document.getElementById(
-person === 1 ? "mic1" : "mic2"
-);
+"sourceLang"
+).textContent =
+arabicToEnglish
+? "🇸🇦 العربية"
+: "🇬🇧 English";
 
-const status =
+
 document.getElementById(
-person === 1 ? "status1" : "status2"
-);
+"targetLang"
+).textContent =
+arabicToEnglish
+? "🇬🇧 English"
+: "🇸🇦 العربية";
 
-mic.classList.remove("listening");
 
-mic.textContent = "🎙️";
+/*
+   الشخص الأول
+*/
 
-const arabic =
-person === 1
-? arabicToEnglish
-: !arabicToEnglish;
+document.getElementById(
+"person1Lang"
+).textContent =
+arabicToEnglish
+? "🇸🇦 العربية"
+: "🇬🇧 English";
 
-status.textContent =
-arabic
+
+/*
+   الشخص الثاني
+*/
+
+document.getElementById(
+"person2Lang"
+).textContent =
+arabicToEnglish
+? "🇬🇧 English"
+: "🇸🇦 العربية";
+
+
+/*
+   الحالات
+*/
+
+setStatus(
+1,
+arabicToEnglish
 ? "اضغط وتحدث بالعربية"
-: "Press and speak English";
+: "Press and speak English"
+);
+
+
+setStatus(
+2,
+arabicToEnglish
+? "Press and speak English"
+: "اضغط وتحدث بالعربية"
+);
+
+
+/*
+   تنظيف الشاشات
+*/
+
+document.getElementById(
+"person1Source"
+).innerHTML =
+'<span class="placeholder">اضغط على الميكروفون وتحدث...</span>';
+
+
+document.getElementById(
+"person1Target"
+).innerHTML =
+'<span class="placeholder">ستظهر الترجمة هنا...</span>';
+
+
+document.getElementById(
+"person2Source"
+).innerHTML =
+'<span class="placeholder">اضغط على الميكروفون وتحدث...</span>';
+
+
+document.getElementById(
+"person2Target"
+).innerHTML =
+'<span class="placeholder">ستظهر الترجمة هنا...</span>';
 
 }
 
 
-/* =========================================
+
+/* =====================================================
    CLEAR CHAT
-========================================= */
+===================================================== */
 
 function clearChat(){
 
 const chat =
 document.getElementById("chat");
 
+
 chat.innerHTML = `
 
-<div class="empty" id="empty">
+<div class="emptyChat" id="emptyChat">
 
-<div>
-
-<div class="emptyIcon">💬</div>
-
-<div>ابدأ الكلام...</div>
-
-<div style="font-size:12px;margin-top:6px">
-كل شخص يتحدث بلغته
-</div>
-
-</div>
+ابدأ الكلام من أحد الميكروفونين
+وستظهر المحادثة هنا.
 
 </div>
 
@@ -1350,18 +1773,37 @@ chat.innerHTML = `
 }
 
 
-/* =========================================
-   COPY / SECURITY
-========================================= */
 
-function escapeHTML(text){
+/* =====================================================
+   SPEAK
+===================================================== */
 
-return String(text)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+function speak(text,lang){
+
+if(!("speechSynthesis" in window)){
+
+return;
+
+}
+
+
+speechSynthesis.cancel();
+
+
+const voice =
+new SpeechSynthesisUtterance(text);
+
+
+voice.lang = lang;
+
+voice.rate = .95;
+
+voice.pitch = 1;
+
+
+speechSynthesis.speak(
+voice
+);
 
 }
 
