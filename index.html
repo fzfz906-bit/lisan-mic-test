@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Lisan</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+background:linear-gradient(145deg,#061326,#0a2342,#03101f);
+color:#fff;
+min-height:100vh
+}
+.app{
+width:min(900px,94%);
+margin:auto;
+padding:28px 0 40px
+}
+header{text-align:center;margin-bottom:25px}
+.logo{
+font-size:46px;
+font-weight:800;
+letter-spacing:-2px
+}
+.sub{color:#91a8c4;margin-top:4px}
+.status{
+display:inline-flex;
+align-items:center;
+gap:7px;
+margin-top:12px;
+padding:7px 13px;
+border-radius:20px;
+background:#ffffff0d;
+font-size:12px;
+color:#aebed1
+}
+.dot{
+width:8px;height:8px;border-radius:50%;background:#35d07f
+}
+.languages{
+display:grid;
+grid-template-columns:1fr 55px 1fr;
+gap:10px;
+align-items:center;
+margin-bottom:18px
+}
+.lang{
+background:#ffffff0b;
+border:1px solid #ffffff12;
+border-radius:17px;
+padding:14px;
+text-align:center
+}
+.lang b{display:block;font-size:18px}
+.lang small{color:#8195ad}
+.swap{
+width:48px;height:48px;
+border:0;border-radius:50%;
+background:#fff;color:#061326;
+font-size:22px
+}
+.people{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px
+}
+.card{
+background:#ffffff0b;
+border:1px solid #ffffff12;
+border-radius:23px;
+padding:18px;
+backdrop-filter:blur(15px)
+}
+.person{
+display:flex;
+justify-content:space-between;
+margin-bottom:13px
+}
+.person b{font-size:18px}
+.person span{font-size:12px;color:#8499b2}
+.mic{
+width:100%;
+height:145px;
+border:0;
+border-radius:19px;
+background:linear-gradient(145deg,#103665,#0a203d);
+color:#fff;
+font-size:17px;
+font-weight:700
+}
+.mic.recording{
+background:linear-gradient(145deg,#8b1837,#431126)
+}
+.icon{
+display:block;
+font-size:43px;
+margin-bottom:7px
+}
+.box{
+margin-top:11px;
+padding:13px;
+border-radius:14px;
+background:#00000020;
+min-height:60px;
+line-height:1.7
+}
+.translation{
+background:#268cff12;
+border:1px solid #268cff20
+}
+.label{
+font-size:10px;
+color:#7890aa;
+margin-bottom:4px
+}
+.speak{
+width:100%;
+border:0;
+margin-top:9px;
+padding:11px;
+border-radius:13px;
+background:#ffffff0d;
+color:#fff
+}
+.error{
+display:none;
+margin-top:15px;
+padding:13px;
+border-radius:13px;
+background:#ff365015;
+border:1px solid #ff365025;
+color:#ffabb9;
+line-height:1.6
+}
+.chat{
+margin-top:18px
+}
+.chat h2{margin-top:0}
+.message{
+padding:13px;
+margin-bottom:10px;
+border-radius:15px;
+background:#ffffff08;
+border-right:3px solid #4d9dff
+}
+.message .small{
+font-size:10px;
+color:#8298b2;
+margin-bottom:4px
+}
+.message .tr{
+color:#a8ceff;
+margin-top:4px
+}
+.clear{
+float:left;
+border:0;
+padding:8px 12px;
+border-radius:10px;
+background:#ffffff0b;
+color:#b7c7d9
+}
+.empty{
+text-align:center;
+color:#70859f;
+padding:20px
+}
+@media(max-width:700px){
+.people{grid-template-columns:1fr}
+.logo{font-size:40px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<div class="logo">Lisan</div>
+<div class="sub">تحدث بلغتك، ودع Lisan يتحدث بلغتهم</div>
+
+<div class="status">
+<span class="dot"></span>
+<span id="status">جاري الاتصال...</span>
+</div>
+</header>
+
+<div class="languages">
+
+<div class="lang">
+<b id="leftLang">العربية 🇸🇦</b>
+<small id="leftSub">Arabic</small>
+</div>
+
+<button class="swap" onclick="swap()">⇄</button>
+
+<div class="lang">
+<b id="rightLang">English 🇺🇸</b>
+<small id="rightSub">English</small>
+</div>
+
+</div>
+
+
+<div class="people">
+
+<!-- PERSON 1 -->
+
+<div class="card">
+
+<div class="person">
+<b>الشخص الأول</b>
+<span id="p1lang">العربية</span>
+</div>
+
+<button id="mic1" class="mic" onclick="listen(1)">
+<span class="icon">🎤</span>
+<span>اضغط وتحدث</span>
+</button>
+
+<div class="box">
+<div class="label">كلامك</div>
+<div id="original1">—</div>
+</div>
+
+<div class="box translation">
+<div class="label">الترجمة</div>
+<div id="translation1">—</div>
+</div>
+
+<button class="speak" onclick="repeatSpeech(1)">
+🔊 سماع الترجمة
+</button>
+
+</div>
+
+
+<!-- PERSON 2 -->
+
+<div class="card">
+
+<div class="person">
+<b>الشخص الثاني</b>
+<span id="p2lang">English</span>
+</div>
+
+<button id="mic2" class="mic" onclick="listen(2)">
+<span class="icon">🎤</span>
+<span>Speak</span>
+</button>
+
+<div class="box">
+<div class="label">Original</div>
+<div id="original2">—</div>
+</div>
+
+<div class="box translation">
+<div class="label">Translation</div>
+<div id="translation2">—</div>
+</div>
+
+<button class="speak" onclick="repeatSpeech(2)">
+🔊 Hear translation
+</button>
+
+</div>
+
+</div>
+
+
+<div id="error" class="error"></div>
+
+
+<div class="card chat">
+
+<button class="clear" onclick="clearChat()">مسح</button>
+
+<h2>💬 المحادثة</h2>
+
+<div id="messages">
+<div class="empty">ابدأ الحديث من أي طرف 🎤</div>
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const BACKEND="https://lisan-backend-mjh3.onrender.com";
+
+let arabicFirst=true;
+
+let recognition=null;
+let recording=false;
+let personNow=null;
+
+let transcript="";
+
+let last1="";
+let last2="";
+
+
+/* SERVER */
+
+async function checkServer(){
+
+try{
+
+const r=await fetch(BACKEND);
+
+if(r.ok){
+
+document.getElementById("status").textContent=
+"Lisan AI متصل";
+
+}else{
+
+document.getElementById("status").textContent=
+"الخادم فيه مشكلة";
+
+}
+
+}catch(e){
+
+document.getElementById("status").textContent=
+"الخادم غير متصل";
+
+}
+
+}
+
+checkServer();
+
+
+/* LANGUAGES */
+
+function source(person){
+
+if(arabicFirst)
+return person===1?"Arabic":"English";
+
+return person===1?"English":"Arabic";
+
+}
+
+function target(person){
+
+if(arabicFirst)
+return person===1?"English":"Arabic";
+
+return person===1?"Arabic":"English";
+
+}
+
+function recognitionLang(person){
+
+return source(person)==="Arabic"
+?"ar-SA"
+:"en-US";
+
+}
+
+
+/* SWAP */
+
+function swap(){
+
+arabicFirst=!arabicFirst;
+
+document.getElementById("leftLang").textContent=
+arabicFirst?"العربية 🇸🇦":"English 🇺🇸";
+
+document.getElementById("rightLang").textContent=
+arabicFirst?"English 🇺🇸":"العربية 🇸🇦";
+
+document.getElementById("leftSub").textContent=
+arabicFirst?"Arabic":"English";
+
+document.getElementById("rightSub").textContent=
+arabicFirst?"English":"Arabic";
+
+document.getElementById("p1lang").textContent=
+arabicFirst?"العربية":"English";
+
+document.getElementById("p2lang").textContent=
+arabicFirst?"English":"العربية";
+
+}
+
+
+/* LISTEN */
+
+function listen(person){
+
+hideError();
+
+if(recording){
+
+if(recognition){
+
+try{recognition.stop()}catch(e){}
+
+}
+
+return;
+
+}
+
+
+const SR=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
+
+if(!SR){
+
+showError(
+"هذا المتصفح لا يدعم التعرف على الكلام. افتح الموقع في Safari."
+);
+
+return;
+
+}
+
+
+recognition=new SR();
+
+recognition.lang=
+recognitionLang(person);
+
+recognition.continuous=false;
+recognition.interimResults=true;
+recognition.maxAlternatives=1;
+
+personNow=person;
+transcript="";
+recording=true;
+
+
+const button=
+document.getElementById("mic"+person);
+
+button.classList.add("recording");
+
+button.querySelector("span:last-child").textContent=
+person===1?"جاري الاستماع...":"Listening...";
+
+
+recognition.onstart=()=>{
+
+transcript="";
+
+};
+
+
+recognition.onresult=(event)=>{
+
+let text="";
+
+for(let i=0;i<event.results.length;i++){
+
+text+=event.results[i][0].transcript;
+
+}
+
+text=text.trim();
+
+if(text){
+
+transcript=text;
+
+document.getElementById(
+"original"+person
+).textContent=text;
+
+}
+
+};
+
+
+recognition.onerror=(event)=>{
+
+console.log(event);
+
+recording=false;
+
+button.classList.remove("recording");
+
+button.querySelector("span:last-child").textContent=
+person===1?"اضغط وتحدث":"Speak";
+
+if(event.error==="not-allowed"){
+
+showError(
+"اسمح للموقع باستخدام الميكروفون من إعدادات المتصفح."
+);
+
+}else{
+
+showError(
+"لم أستطع التقاط الكلام. حاول مرة أخرى."
+);
+
+}
+
+};
+
+
+recognition.onend=async()=>{
+
+recording=false;
+
+button.classList.remove("recording");
+
+button.querySelector("span:last-child").textContent=
+person===1?"اضغط وتحدث":"Speak";
+
+
+if(!transcript){
+
+showError("لم يتم التقاط كلامك.");
+
+return;
+
+}
+
+
+await translate(
+person,
+transcript
+);
+
+};
+
+
+try{
+
+recognition.start();
+
+}catch(e){
+
+recording=false;
+
+button.classList.remove("recording");
+
+showError("تعذر تشغيل الميكروفون.");
+
+}
+
+}
+
+
+/* TRANSLATE */
+
+async function translate(person,text){
+
+const tr=
+document.getElementById(
+"translation"+person
+);
+
+tr.textContent="⏳ جاري الترجمة...";
+
+try{
+
+const response=
+await fetch(
+BACKEND+"/translate",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+
+text:text,
+
+source:source(person),
+
+target:target(person)
+
+})
+}
+);
+
+
+let data;
+
+try{
+
+data=await response.json();
+
+}catch(e){
+
+throw new Error(
+"الخادم لم يرجع استجابة صحيحة"
+);
+
+}
+
+
+if(!response.ok){
+
+throw new Error(
+data.error||"فشل الاتصال بالمترجم"
+);
+
+}
+
+
+const translated=
+(data.translation||"").trim();
+
+
+if(!translated){
+
+throw new Error(
+"لم تصل الترجمة"
+);
+
+}
+
+
+tr.textContent=translated;
+
+
+if(person===1){
+
+last1=translated;
+
+}else{
+
+last2=translated;
+
+}
+
+
+addMessage(
+person,
+text,
+translated
+);
+
+
+/* الصوت */
+
+speak(
+translated,
+target(person)
+);
+
+
+}catch(e){
+
+console.error(e);
+
+tr.textContent="❌ فشلت الترجمة";
+
+showError(
+"خطأ الترجمة: "+e.message
+);
+
+}
+
+}
+
+
+/* SPEAK */
+
+function speak(text,lang){
+
+if(!text)return;
+
+
+if(!window.speechSynthesis){
+
+showError(
+"المتصفح لا يدعم تشغيل الصوت."
+);
+
+return;
+
+}
+
+
+window.speechSynthesis.cancel();
+
+
+const utterance=
+new SpeechSynthesisUtterance(text);
+
+
+utterance.lang=
+lang==="Arabic"
+?"ar-SA"
+:"en-US";
+
+utterance.rate=.95;
+
+utterance.pitch=1;
+
+
+window.speechSynthesis.speak(
+utterance
+);
+
+}
+
+
+/* REPEAT */
+
+function repeatSpeech(person){
+
+const text=
+person===1?last1:last2;
+
+speak(
+text,
+target(person)
+);
+
+}
+
+
+/* CHAT */
+
+function addMessage(person,original,translated){
+
+const box=
+document.getElementById("messages");
+
+const empty=
+box.querySelector(".empty");
+
+if(empty)empty.remove();
+
+
+const div=
+document.createElement("div");
+
+div.className="message";
+
+
+const direction=
+source(person)+" → "+target(person);
+
+
+div.innerHTML=
+
+'<div class="small">'+
+"الشخص "+person+" · "+direction+
+"</div>"+
+
+'<div>'+
+escapeHTML(original)+
+"</div>"+
+
+'<div class=\"tr\">"+
+escapeHTML(translated)+
+"</div>"+
+
+'<button class=\"speak\" style=\"margin-top:8px\" >🔊 سماع</button>';
+
+
+div.querySelector("button").onclick=()=>{
+
+speak(
+translated,
+target(person)
+);
+
+};
+
+
+box.prepend(div);
+
+}
+
+
+/* CLEAR */
+
+function clearChat(){
+
+document.getElementById("messages").innerHTML=
+'<div class="empty">ابدأ الحديث من أي طرف 🎤</div>';
+
+document.getElementById("original1").textContent="—";
+document.getElementById("original2").textContent="—";
+
+document.getElementById("translation1").textContent="—";
+document.getElementById("translation2").textContent="—";
+
+last1="";
+last2="";
+
+}
+
+
+/* ERROR */
+
+function showError(message){
+
+const box=
+document.getElementById("error");
+
+box.textContent="⚠️ "+message;
+
+box.style.display="block";
+
+}
+
+function hideError(){
+
+document.getElementById("error").style.display="none";
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(text){
+
+const div=document.createElement("div");
+
+div.textContent=text;
+
+return div.innerHTML;
+
+}
+
+</script>
+
+</body>
+</html>
