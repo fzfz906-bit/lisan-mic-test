@@ -8,9 +8,7 @@
 <title>Lisan V2 | لسان</title>
 
 <style>
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -241,15 +239,9 @@ background:linear-gradient(145deg,#ff486c,#ff7a45);
 }
 
 @keyframes pulse{
-0%{
-box-shadow:0 0 0 0 #ff526655;
-}
-70%{
-box-shadow:0 0 0 25px #ff526600;
-}
-100%{
-box-shadow:0 0 0 0 #ff526600;
-}
+0%{box-shadow:0 0 0 0 #ff526655}
+70%{box-shadow:0 0 0 25px #ff526600}
+100%{box-shadow:0 0 0 0 #ff526600}
 }
 
 .personStatus{
@@ -502,7 +494,6 @@ Lisan
 
 </header>
 
-
 <section class="hero">
 
 <h1>
@@ -515,9 +506,7 @@ Lisan
 تحدث بلغتك وسيحاول Lisan تحويل كلامك إلى لغة الطرف الآخر.
 </p>
 
-
 <div class="demo">
-
 
 <div class="languages">
 
@@ -535,9 +524,7 @@ Lisan
 
 </div>
 
-
 <div class="people">
-
 
 <!-- PERSON 1 -->
 
@@ -555,7 +542,6 @@ Lisan
 
 </div>
 
-
 <div class="personBox">
 
 <div class="label">
@@ -567,7 +553,6 @@ Lisan
 اضغط على الميكروفون وتحدث...
 </span>
 </div>
-
 
 <div class="translation">
 
@@ -584,7 +569,6 @@ Lisan
 </div>
 
 </div>
-
 
 <button
 class="micButton"
@@ -604,7 +588,6 @@ id="status1"
 </div>
 
 
-
 <!-- PERSON 2 -->
 
 <div class="person">
@@ -621,7 +604,6 @@ id="status1"
 
 </div>
 
-
 <div class="personBox">
 
 <div class="label">
@@ -633,7 +615,6 @@ id="status1"
 Press the microphone and speak...
 </span>
 </div>
-
 
 <div class="translation">
 
@@ -650,7 +631,6 @@ Translation will appear here...
 </div>
 
 </div>
-
 
 <button
 class="micButton"
@@ -672,7 +652,6 @@ Press and speak English
 </div>
 
 
-
 <!-- CONVERSATION -->
 
 <div class="conversation">
@@ -692,7 +671,6 @@ onclick="clearChat()"
 
 </div>
 
-
 <div class="chat" id="chat">
 
 <div class="emptyChat" id="emptyChat">
@@ -703,11 +681,9 @@ onclick="clearChat()"
 
 </div>
 
-
 </div>
 
 </section>
-
 
 
 <section class="examples">
@@ -723,7 +699,6 @@ onclick="clearChat()"
 <div class="phrases" id="phrases"></div>
 
 </section>
-
 
 
 <div class="stats">
@@ -751,7 +726,6 @@ onclick="clearChat()"
 </div>
 
 
-
 <div class="notice">
 
 <strong>نسخة Lisan V2 التجريبية:</strong>
@@ -763,7 +737,6 @@ onclick="clearChat()"
 </div>
 
 
-
 <footer>
 Lisan © 2026 — Speak. Understand. Connect.
 </footer>
@@ -771,11 +744,10 @@ Lisan © 2026 — Speak. Understand. Connect.
 </div>
 
 
-
 <script>
 
 /* =====================================================
-   100 ARABIC / ENGLISH PHRASES
+   PHRASES
 ===================================================== */
 
 const phrases = [
@@ -898,15 +870,12 @@ const phrases = [
 ===================================================== */
 
 let arabicToEnglish = true;
-
 let recognition = null;
-
 let listening = false;
-
 let activePerson = null;
 
 let finalTranscript = "";
-
+let lastTranscript = "";
 
 
 /* =====================================================
@@ -916,9 +885,10 @@ let finalTranscript = "";
 const phrasesContainer =
 document.getElementById("phrases");
 
-phrases.forEach((p,index)=>{
+phrases.forEach((p)=>{
 
-const div = document.createElement("div");
+const div =
+document.createElement("div");
 
 div.className = "phrase";
 
@@ -929,19 +899,25 @@ div.innerHTML = `
 
 div.onclick = ()=>{
 
-/*
-   الجمل التجريبية تعمل مع الشخص الأول
-*/
-
-const sourceArabic = arabicToEnglish;
+const sourceArabic =
+arabicToEnglish;
 
 const source =
-sourceArabic ? p[0] : p[1];
+sourceArabic
+? p[0]
+: p[1];
 
 const target =
-sourceArabic ? p[1] : p[0];
+sourceArabic
+? p[1]
+: p[0];
 
-showPerson(1,source,target,sourceArabic);
+showPerson(
+1,
+source,
+target,
+sourceArabic
+);
 
 addMessage(
 source,
@@ -952,7 +928,9 @@ sourceArabic
 
 speak(
 target,
-sourceArabic ? "en-US" : "ar-SA"
+sourceArabic
+? "en-US"
+: "ar-SA"
 );
 
 };
@@ -960,7 +938,6 @@ sourceArabic ? "en-US" : "ar-SA"
 phrasesContainer.appendChild(div);
 
 });
-
 
 
 /* =====================================================
@@ -978,53 +955,59 @@ return text
 }
 
 
-
 /* =====================================================
    TRANSLATE
-   IMPORTANT:
-   sourceArabic is passed directly.
-   We do NOT depend on global state while translating.
 ===================================================== */
 
-function translateForDirection(text,sourceArabic){
+function translateForDirection(
+text,
+sourceArabic
+){
 
-const input = normalize(text);
+const input =
+normalize(text);
+
+if(!input){
+
+return null;
+
+}
 
 let best = null;
-
 let bestScore = 0;
 
 for(const pair of phrases){
 
 const source =
-sourceArabic ? pair[0] : pair[1];
+sourceArabic
+? pair[0]
+: pair[1];
 
 const target =
-sourceArabic ? pair[1] : pair[0];
+sourceArabic
+? pair[1]
+: pair[0];
 
-const s = normalize(source);
+const normalizedSource =
+normalize(source);
 
 
-/*
-   Exact match
-*/
+/* EXACT MATCH */
 
-if(input === s){
+if(input === normalizedSource){
 
 return target;
 
 }
 
 
-/*
-   Similarity match
-*/
+/* WORD MATCH */
 
 const inputWords =
 input.split(" ");
 
 const sourceWords =
-s.split(" ");
+normalizedSource.split(" ");
 
 let matches = 0;
 
@@ -1038,7 +1021,6 @@ matches++;
 
 });
 
-
 const score =
 matches /
 Math.max(
@@ -1046,14 +1028,12 @@ inputWords.length,
 sourceWords.length
 );
 
-
 if(
 score > bestScore &&
 score >= .55
 ){
 
 bestScore = score;
-
 best = target;
 
 }
@@ -1065,9 +1045,8 @@ return best;
 }
 
 
-
 /* =====================================================
-   LISTEN FOR PERSON
+   LISTEN
 ===================================================== */
 
 function listenFor(person){
@@ -1081,7 +1060,7 @@ if(!SpeechRecognition){
 
 setStatus(
 person,
-"❌ التعرف على الصوت غير مدعوم. افتح الموقع في Safari أو Chrome."
+"❌ التعرف على الصوت غير مدعوم."
 );
 
 return;
@@ -1089,14 +1068,14 @@ return;
 }
 
 
-/*
-   إذا كان الميكروفون يعمل،
-   اضغط مرة ثانية لإيقافه.
-*/
+/* STOP */
 
 if(listening){
 
-if(activePerson === person && recognition){
+if(
+activePerson === person &&
+recognition
+){
 
 recognition.stop();
 
@@ -1107,47 +1086,53 @@ return;
 }
 
 
-/*
-   تحديد لغة هذا الشخص
-*/
+/* =====================================================
+   DETERMINE LANGUAGE
+===================================================== */
 
 const sourceArabic =
 person === 1
 ? arabicToEnglish
 : !arabicToEnglish;
 
-
-/*
-   إنشاء التعرف
-*/
-
-recognition =
-new SpeechRecognition();
-
-
-recognition.lang =
+const sourceLang =
 sourceArabic
 ? "ar-SA"
 : "en-US";
 
 
-recognition.continuous = false;
+/* =====================================================
+   CREATE RECOGNITION
+===================================================== */
 
-recognition.interimResults = true;
+recognition =
+new SpeechRecognition();
 
-recognition.maxAlternatives = 3;
+recognition.lang =
+sourceLang;
 
+recognition.continuous =
+false;
+
+recognition.interimResults =
+true;
+
+recognition.maxAlternatives =
+3;
+
+
+/* STATE */
 
 listening = true;
-
 activePerson = person;
 
 finalTranscript = "";
+lastTranscript = "";
 
 
-/*
+/* =====================================================
    START
-*/
+===================================================== */
 
 recognition.onstart = ()=>{
 
@@ -1158,8 +1143,8 @@ document.getElementById(
 
 mic.classList.add("listening");
 
-mic.textContent = "⏹️";
-
+mic.textContent =
+"⏹️";
 
 setStatus(
 person,
@@ -1171,127 +1156,168 @@ sourceArabic
 };
 
 
-/*
+/* =====================================================
    RESULT
-*/
+===================================================== */
 
 recognition.onresult = (event)=>{
 
-let interim = "";
-
-let finals = "";
+let currentText = "";
 
 
 /*
-   نجمع النتائج النهائية فقط
+   نقرأ جميع النتائج.
+   لا نعتمد فقط على isFinal.
 */
 
 for(
-let i=event.resultIndex;
-i<event.results.length;
+let i = 0;
+i < event.results.length;
 i++
 ){
 
-const text =
+if(
+event.results[i] &&
+event.results[i][0]
+){
+
+currentText +=
+" " +
 event.results[i][0].transcript;
 
-
-if(event.results[i].isFinal){
-
-finals += text;
-
-}else{
-
-interim += text;
-
 }
 
 }
+
+
+currentText =
+currentText.trim();
 
 
 /*
-   حفظ النتيجة النهائية
+   IMPORTANT:
+
+   نحفظ النص حتى لو كان
+   INTERIM وليس FINAL.
+
+   هذا هو إصلاح مشكلة العربي
+   في Safari.
 */
 
-if(finals.trim()){
+if(currentText){
 
-finalTranscript += finals;
-
-}
+lastTranscript =
+currentText;
 
 
 /*
-   إظهار الكلام للمستخدم
+   إظهار الكلام
 */
 
-const preview =
-(finalTranscript + " " + interim).trim();
-
-
-if(preview){
-
+const sourceElement =
 document.getElementById(
 "person"+person+"Source"
-).textContent = preview;
+);
 
-}
+sourceElement.textContent =
+currentText;
 
 
 /*
-   أثناء الكلام:
-   نعرض الترجمة فقط إذا كانت
-   النتيجة قابلة للمطابقة.
+   ترجمة مباشرة
 */
 
-if(interim){
-
-const liveResult =
+const liveTranslation =
 translateForDirection(
-interim,
+currentText,
 sourceArabic
 );
 
-if(liveResult){
+
+if(liveTranslation){
 
 document.getElementById(
 "person"+person+"Target"
 ).textContent =
-liveResult;
+liveTranslation;
 
 }
+
+}
+
+
+/*
+   حفظ FINAL أيضًا
+*/
+
+let finalText = "";
+
+for(
+let i = event.resultIndex;
+i < event.results.length;
+i++
+){
+
+if(
+event.results[i].isFinal &&
+event.results[i][0]
+){
+
+finalText +=
+" " +
+event.results[i][0].transcript;
+
+}
+
+}
+
+
+if(finalText.trim()){
+
+finalTranscript =
+(
+finalTranscript +
+" " +
+finalText
+).trim();
 
 }
 
 };
 
 
-/*
+/* =====================================================
    ERROR
-*/
+===================================================== */
 
 recognition.onerror = (event)=>{
 
 console.log(
-"Speech error:",
+"SpeechRecognition error:",
 event.error
 );
 
-
-if(event.error === "not-allowed"){
+if(
+event.error === "not-allowed"
+){
 
 setStatus(
 person,
 "❌ اسمح للمتصفح باستخدام الميكروفون."
 );
 
-}else if(event.error === "no-speech"){
+}else if(
+event.error === "no-speech"
+){
 
 setStatus(
 person,
 "لم أسمع شيئًا، حاول مرة أخرى."
 );
 
-}else if(event.error === "aborted"){
+}else if(
+event.error === "aborted"
+){
 
 setStatus(
 person,
@@ -1312,25 +1338,77 @@ resetMic();
 };
 
 
-/*
+/* =====================================================
    END
-*/
+===================================================== */
 
 recognition.onend = ()=>{
 
-const source =
+/*
+   أهم جزء:
+
+   FINAL أولًا
+   ثم LAST INTERIM
+   ثم النص الموجود على الشاشة.
+*/
+
+let source =
 finalTranscript.trim();
 
 
+if(!source){
+
+source =
+lastTranscript.trim();
+
+}
+
+
+if(!source){
+
+const sourceElement =
+document.getElementById(
+"person"+person+"Source"
+);
+
+source =
+sourceElement.innerText.trim();
+
+}
+
+
 /*
-   إذا كان فيه كلام
+   لا يوجد نص
 */
 
-if(source){
+if(!source){
+
+setStatus(
+person,
+sourceArabic
+? "لم أسمع كلامًا."
+: "No speech detected."
+);
+
+resetMic();
+
+return;
+
+}
+
 
 /*
-   نترجم باستخدام اتجاه اللغة
-   الذي كان موجودًا عند بداية التسجيل.
+   عرض النص النهائي
+*/
+
+document.getElementById(
+"person"+person+"Source"
+).textContent =
+source;
+
+
+/*
+   الترجمة النهائية
 */
 
 const result =
@@ -1339,6 +1417,10 @@ source,
 sourceArabic
 );
 
+
+/*
+   وجدنا ترجمة
+*/
 
 if(result){
 
@@ -1353,7 +1435,7 @@ result;
 
 
 /*
-   إضافة للمحادثة
+   المحادثة
 */
 
 addMessage(
@@ -1365,7 +1447,7 @@ sourceArabic
 
 
 /*
-   نطق الترجمة
+   النطق
 */
 
 speak(
@@ -1377,48 +1459,45 @@ sourceArabic
 
 
 /*
-   حالة النجاح
+   نجاح
 */
 
 setStatus(
 person,
 sourceArabic
-? "✅ تمت الترجمة"
+? "✅ تمت الترجمة والنطق"
 : "✅ Translation complete"
 );
 
-
 }else{
-
-/*
-   لم نجد الجملة
-*/
 
 document.getElementById(
 "person"+person+"Target"
 ).innerHTML =
 '<span class="placeholder">هذه الجملة خارج جمل الديمو الـ100.</span>';
 
-
 setStatus(
 person,
 sourceArabic
-? "لم أجد ترجمة لهذه العبارة في النسخة التجريبية."
+? "لم أجد ترجمة لهذه العبارة."
 : "This sentence is outside the demo phrases."
 );
 
 }
 
-}
-
 
 /*
-   Reset
+   Reset AFTER processing
 */
 
 resetMic();
 
 };
+
+
+/* =====================================================
+   START RECOGNITION
+===================================================== */
 
 try{
 
@@ -1426,14 +1505,16 @@ recognition.start();
 
 }catch(error){
 
-console.log(error);
+console.log(
+"Recognition start error:",
+error
+);
 
 resetMic();
 
 }
 
 }
-
 
 
 /* =====================================================
@@ -1443,39 +1524,50 @@ resetMic();
 function resetMic(){
 
 listening = false;
-
 activePerson = null;
 
-
-for(let i=1;i<=2;i++){
+for(
+let i = 1;
+i <= 2;
+i++
+){
 
 const mic =
 document.getElementById(
 "mic"+i
 );
 
-mic.classList.remove("listening");
+if(mic){
 
-mic.textContent = "🎙️";
+mic.classList.remove(
+"listening"
+);
+
+mic.textContent =
+"🎙️";
 
 }
 
 }
 
+}
 
 
 /* =====================================================
    STATUS
 ===================================================== */
 
-function setStatus(person,text){
+function setStatus(
+person,
+text
+){
 
 document.getElementById(
 "status"+person
-).textContent = text;
+).textContent =
+text;
 
 }
-
 
 
 /* =====================================================
@@ -1494,14 +1586,12 @@ document.getElementById(
 ).textContent =
 source;
 
-
 document.getElementById(
 "person"+person+"Target"
 ).textContent =
 target;
 
 }
-
 
 
 /* =====================================================
@@ -1518,10 +1608,8 @@ sourceArabic
 const chat =
 document.getElementById("chat");
 
-
 const empty =
 document.getElementById("emptyChat");
-
 
 if(empty){
 
@@ -1533,12 +1621,13 @@ empty.remove();
 const message =
 document.createElement("div");
 
-
 message.className =
 "message " +
-(person === 1
+(
+person === 1
 ? "person1"
-: "person2");
+: "person2"
+);
 
 
 const personName =
@@ -1589,7 +1678,9 @@ ${escapeHTML(target)}
 
 
 const speakButton =
-message.querySelector(".speakBtn");
+message.querySelector(
+".speakBtn"
+);
 
 
 speakButton.onclick = ()=>{
@@ -1606,16 +1697,10 @@ sourceArabic
 
 chat.appendChild(message);
 
-
-/*
-   النزول لآخر رسالة
-*/
-
 chat.scrollTop =
 chat.scrollHeight;
 
 }
-
 
 
 /* =====================================================
@@ -1627,23 +1712,25 @@ function escapeHTML(text){
 const div =
 document.createElement("div");
 
-div.textContent = text;
+div.textContent =
+text;
 
 return div.innerHTML;
 
 }
 
 
-
 /* =====================================================
-   SWAP LANGUAGES
+   SWAP
 ===================================================== */
 
 function swapLanguages(){
 
 if(listening){
 
-alert("أوقف الميكروفون أولًا ثم بدّل اللغات.");
+alert(
+"أوقف الميكروفون أولًا ثم بدّل اللغات."
+);
 
 return;
 
@@ -1655,7 +1742,7 @@ arabicToEnglish =
 
 
 /*
-   أعلى الشاشة
+   TOP
 */
 
 document.getElementById(
@@ -1675,7 +1762,7 @@ arabicToEnglish
 
 
 /*
-   الشخص الأول
+   PERSON 1
 */
 
 document.getElementById(
@@ -1687,7 +1774,7 @@ arabicToEnglish
 
 
 /*
-   الشخص الثاني
+   PERSON 2
 */
 
 document.getElementById(
@@ -1699,7 +1786,7 @@ arabicToEnglish
 
 
 /*
-   الحالات
+   STATUS
 */
 
 setStatus(
@@ -1708,7 +1795,6 @@ arabicToEnglish
 ? "اضغط وتحدث بالعربية"
 : "Press and speak English"
 );
-
 
 setStatus(
 2,
@@ -1719,7 +1805,7 @@ arabicToEnglish
 
 
 /*
-   تنظيف الشاشات
+   RESET DISPLAY
 */
 
 document.getElementById(
@@ -1727,26 +1813,22 @@ document.getElementById(
 ).innerHTML =
 '<span class="placeholder">اضغط على الميكروفون وتحدث...</span>';
 
-
 document.getElementById(
 "person1Target"
 ).innerHTML =
 '<span class="placeholder">ستظهر الترجمة هنا...</span>';
 
-
 document.getElementById(
 "person2Source"
 ).innerHTML =
-'<span class="placeholder">اضغط على الميكروفون وتحدث...</span>';
-
+'<span class="placeholder">Press the microphone and speak...</span>';
 
 document.getElementById(
 "person2Target"
 ).innerHTML =
-'<span class="placeholder">ستظهر الترجمة هنا...</span>';
+'<span class="placeholder">Translation will appear here...</span>';
 
 }
-
 
 
 /* =====================================================
@@ -1757,7 +1839,6 @@ function clearChat(){
 
 const chat =
 document.getElementById("chat");
-
 
 chat.innerHTML = `
 
@@ -1773,14 +1854,18 @@ chat.innerHTML = `
 }
 
 
-
 /* =====================================================
    SPEAK
 ===================================================== */
 
-function speak(text,lang){
+function speak(
+text,
+lang
+){
 
-if(!("speechSynthesis" in window)){
+if(
+!("speechSynthesis" in window)
+){
 
 return;
 
@@ -1789,17 +1874,19 @@ return;
 
 speechSynthesis.cancel();
 
-
 const voice =
-new SpeechSynthesisUtterance(text);
+new SpeechSynthesisUtterance(
+text
+);
 
+voice.lang =
+lang;
 
-voice.lang = lang;
+voice.rate =
+.95;
 
-voice.rate = .95;
-
-voice.pitch = 1;
-
+voice.pitch =
+1;
 
 speechSynthesis.speak(
 voice
